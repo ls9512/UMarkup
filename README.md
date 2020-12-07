@@ -25,7 +25,7 @@
 	numbering=true
 	autoSave=true
 	/vscode-markdown-toc-config -->
-<!-- /vscode-markdown-toc --># UPlugins / UMarkup
+<!-- /vscode-markdown-toc -->
 
 ##  1. <a name='Howtouse'></a>How to use
 ###  1.1. <a name='ExtensionStyle'></a>Extension Style
