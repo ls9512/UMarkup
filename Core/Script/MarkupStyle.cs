@@ -4,7 +4,7 @@
 	{
         public static MarkupAdapter Bold { get; } = new MarkupAdapter("<b>", "</b>");
 
-		public static MarkupAdapter Italic { get; } = new MarkupAdapter("<i>", "</i>");
+        public static MarkupAdapter Italic { get; } = new MarkupAdapter("<i>", "</i>");
 
         public static MarkupAdapter Size(int size)
         {
@@ -12,6 +12,11 @@
             var leftMark = BuildStr("<size=", size, ">");
             var rightMark = "</size>";
             return new MarkupAdapter(leftMark, rightMark);
+        }
+
+        public static string Size(this string str, int size)
+        {
+            return str.ToMarkup(UMarkup.Size(size));
         }
 
 		public static MarkupAdapter Material(int index) 

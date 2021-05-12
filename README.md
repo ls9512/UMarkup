@@ -11,15 +11,17 @@
 
 <!-- vscode-markdown-toc -->
 * 1. [How to use](#Howtouse)
-	* 1.1. [Extension Style](#ExtensionStyle)
-	* 1.2. [Method Style](#MethodStyle)
+	* 1.1. [Common Styles](#CommonStyles)
+	* 1.2. [Extension Method](#ExtensionMethod)
+	* 1.3. [Static Method](#StaticMethod)
 * 2. [Supported Tags](#SupportedTags)
 	* 2.1. [Font Sytle](#FontSytle)
 	* 2.2. [Color Sytle](#ColorSytle)
 	* 2.3. [Other](#Other)
-* 3. [Extension for TextMeshPro](#ExtensionforTextMeshPro)
-	* 3.1. [Supported Tags](#SupportedTags-1)
-	* 3.2. [Supported Size Formart](#SupportedSizeFormart)
+* 3. [Custom Style](#CustomStyle)
+* 4. [Extension for TextMeshPro](#ExtensionforTextMeshPro)
+	* 4.1. [Supported Tags](#SupportedTags-1)
+	* 4.2. [Supported Size Formart](#SupportedSizeFormart)
 
 <!-- vscode-markdown-toc-config
 	numbering=true
@@ -28,9 +30,25 @@
 <!-- /vscode-markdown-toc -->
 
 ##  1. <a name='Howtouse'></a>How to use
-###  1.1. <a name='ExtensionStyle'></a>Extension Style
+###  1.1. <a name='CommonStyles'></a>Common Styles
+Use common styles in a concise way:
 ``` cs
 var str1 = "[Markup Test 1]"
+	// <size=15><b><color=green>Complex Style</color></b></size>
+	+ " Complex Style".Color(Color.green).Bold().Size(15)
+	// <color=#ffffff>White</color>
+	+ " White".Color(Color.white)
+	// <i>Italics</i>
+	+ " Italics".Italic()
+	// <b>Bold</b>
+	+ " Bold".Bold();
+Debug.Log(str1);
+```
+
+###  1.2. <a name='ExtensionMethod'></a>Extension Method
+Use extension methods to organize multiple different styles:
+``` cs
+var str2 = "[Markup Test 2]"
 	// <size=15><b><color=green>Complex Style</color></b></size>
 	+ " Complex Style".ToMarkup(UMarkup.Green, UMarkup.Bold, UMarkup.Size(15))
 	// <color=#ffffff>White</color>
@@ -39,21 +57,21 @@ var str1 = "[Markup Test 1]"
 	+ " Italics".ToMarkup(UMarkup.Italic)
 	// <b>Bold</b>
 	+ " Bold".ToMarkup(UMarkup.Bold);
-Debug.Log(str1);
+Debug.Log(str2);
 ```
 
-###  1.2. <a name='MethodStyle'></a>Method Style 
+###  1.3. <a name='StaticMethod'></a>Static Method 
 ``` cs
-var str2 = "[Markup Test 2]"
+var str3 = "[Markup Test 3]"
 	// <size=15><b><color=green>Complex Style</color></b></size>
-	+ UMarkup.Create(" Complex Style", UMarkup.Yellow, UMarkup.Italic, UMarkup.Size(12))
-    // <color=#ffffff>White</color>
-    + UMarkup.Create(" White", UMarkup.Color(Color.white))
+	+ UMarkup.Create(" Complex Style", UMarkup.Green, UMarkup.Bold, UMarkup.Size(15))
+	// <color=#ffffff>White</color>
+	+ UMarkup.Create(" White", UMarkup.Color(Color.white))
 	// <i>Italics</i>
 	+ UMarkup.Create(" Italics", UMarkup.Italic)
 	// <b>Bold</b>
 	+ UMarkup.Create(" Bold", UMarkup.Bold);
-Debug.Log(str2);
+Debug.Log(str3);
 ```
 ##  2. <a name='SupportedTags'></a>Supported Tags
 ###  2.1. <a name='FontSytle'></a>Font Sytle
@@ -76,10 +94,24 @@ Debug.Log(str2);
 ###  2.3. <a name='Other'></a>Other
 * Material
 * Quad
-##  3. <a name='ExtensionforTextMeshPro'></a>Extension for TextMeshPro
+
+##  3. <a name='CustomStyle'></a>Custom Style
+Support for custom extended styles can be obtained by creating a **MarkupAdapter** with custom parameters.
+``` cs
+public static class MarkupCustomStyleSample
+{
+    // Custom single mark style
+    public static MarkupAdapter CustomStyle1 { get; } = new MarkupAdapter("<singleMark>");
+
+    // Custom left and right mark Style
+    public static MarkupAdapter CustomStyle2 { get; } = new MarkupAdapter("<leftMark>", "</rightMark>");
+}
+```
+
+##  4. <a name='ExtensionforTextMeshPro'></a>Extension for TextMeshPro
 You can also use **UMarkup** to build strings for **TextMeshPro**. The supported tag styles are as follows:
 
-###  3.1. <a name='SupportedTags-1'></a>Supported Tags
+###  4.1. <a name='SupportedTags-1'></a>Supported Tags
 * AlignLeft
 * AlignCenter
 * AlignRight
@@ -112,7 +144,7 @@ You can also use **UMarkup** to build strings for **TextMeshPro**. The supported
 * VerticalOffset
 * Width
 
-###  3.2. <a name='SupportedSizeFormart'></a>Supported Size Formart
+###  4.2. <a name='SupportedSizeFormart'></a>Supported Size Formart
 * Pixels
 * FontUnits
 * Percentages

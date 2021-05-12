@@ -16,6 +16,21 @@ namespace Aya.UI.Markup
             return UMarkup.Create(str, UMarkup.Color(color));
         }
 
+        public static string Color(this string str, Color color)
+        {
+            return str.ToMarkup(color);
+        }
+
+        public static string Bold(this string str)
+        {
+            return str.ToMarkup(UMarkup.Bold);
+        }
+
+        public static string Italic(this string str)
+        {
+            return str.ToMarkup(UMarkup.Italic);
+        }
+
         #endregion
 
         #region Object ToMarkup
