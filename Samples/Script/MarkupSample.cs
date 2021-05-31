@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Aya.UI.Markup;
 
-namespace Aya.Example
+namespace Aya.Sample
 {
     public class MarkupSample : MonoBehaviour
     {
