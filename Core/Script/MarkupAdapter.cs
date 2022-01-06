@@ -40,13 +40,19 @@ namespace Aya.UI.Markup
             if (AdapterBuilder == null) AdapterBuilder = new StringBuilder();
             lock (AdapterBuilder)
             {
-                AdapterBuilder.Clear();
-                for (var i = 0; i < args.Length; i++)
+                try
                 {
-                    AdapterBuilder.Append(args[i]);
-                }
+                    for (var i = 0; i < args.Length; i++)
+                    {
+                        AdapterBuilder.Append(args[i]);
+                    }
 
-                return AdapterBuilder.ToString();
+                    return AdapterBuilder.ToString();
+                }
+                finally
+                {
+                    AdapterBuilder.Clear();
+                }
             }
         }
     }
